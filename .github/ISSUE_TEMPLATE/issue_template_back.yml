@@ -7,7 +7,7 @@ assignees: []
 body:
   - type: markdown
     attributes:
-      value: |
+      value: 
         ## 📌 Task Overview
         어떤 서비스를 개발하는지, 그리고 어떤 기능을 담당하는지 간략하게 설명해주세요.
 
@@ -45,7 +45,7 @@ body:
     id: technical-note
     attributes:
       label: 🛠 Technical Notes
-      placeholder: |
+      placeholder: 
         - 특이사항이나 구현 시 고려해야 할 설계 구조가 있다면 작성해주세요.
         - 사용한 라이브러리나 특정 알고리즘이 있다면 기록하세요.
 
