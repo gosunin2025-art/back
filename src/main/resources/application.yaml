@@ -1,5 +1,9 @@
 server:
   port: 10000
+  servlet:
+    session:
+      tracking-modes: cookie
+      timeout: 30m
 
 spring:
   datasource:
@@ -8,9 +12,16 @@ spring:
     username: spring
     password: 1234
 
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-  mapper-locations: classpath*:/mapper/*.xml
-  type-aliases-package: com.example.mysql.domain;
-  type-handlers-package: com.example.mysql.mybatis.handler
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 10MB
+      max-file-size: 5MB
+      max-request-size: 15MB
+
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#  mapper-locations: classpath*:/mapper/*.xml
+#  type-aliases-package: com.app.threetier.domain; com.app.threetier.dto;
+#  type-handlers-package: com.app.threetier.mybatis.handler
