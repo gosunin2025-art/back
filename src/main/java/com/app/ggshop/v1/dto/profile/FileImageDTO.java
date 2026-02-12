@@ -1,20 +1,19 @@
-package com.app.ggshop.v1.domain;
+package com.app.ggshop.v1.dto.profile;
 
-import com.app.ggshop.v1.audit.dateTime.Period;
 import com.app.ggshop.v1.common.enumeration.FileContentType;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
-@Getter
-@ToString(callSuper = true)
+@Getter @Setter
+@ToString
 @EqualsAndHashCode(of="id")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SuperBuilder
-public class FileVO extends Period {
+@NoArgsConstructor
+public class FileImageDTO {
     private Long id;
     private String fileName;
     private String fileOriginalName;
     private String fileSize;
     private String filePath;
     private FileContentType fileContentType;
+    private String createDate;
+    private String UpdateDate;
 }
