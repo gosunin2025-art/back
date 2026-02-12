@@ -10,6 +10,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
 public abstract class Period {
-    private String created_date;
-    private String updated_date;
+    private String createdDate;
+    private String updatedDate;
 }
