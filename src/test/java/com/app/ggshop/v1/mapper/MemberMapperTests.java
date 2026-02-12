@@ -17,9 +17,9 @@ public class MemberMapperTests {
     @Test
     public void testInsert() {
         MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setMemberEmail("test@gmail.com");
+        memberDTO.setMemberEmail("test12@gmail.com");
         memberDTO.setMemberPassword("1234");
-        memberDTO.setMemberName("test");
+        memberDTO.setMemberName("test12");
         memberDTO.setProvider(Provider.THREETIER);
 
         memberMapper.insert(memberDTO);

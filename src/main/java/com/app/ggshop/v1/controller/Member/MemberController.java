@@ -2,7 +2,7 @@ package com.app.ggshop.v1.controller.Member;
 
 
 import com.app.ggshop.v1.dto.MemberDTO;
-import com.app.ggshop.v1.service.MemberService;
+import com.app.ggshop.v1.service.Login.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

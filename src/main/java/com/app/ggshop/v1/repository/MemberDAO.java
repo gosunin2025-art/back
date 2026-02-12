@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MemberDAO {
+public class  MemberDAO {
     private final MemberMapper memberMapper;
     //    이메일 검사
     public Optional<MemberDTO> findByMemberEmail(String memberEmail){

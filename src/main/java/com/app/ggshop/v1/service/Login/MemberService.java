@@ -1,4 +1,4 @@
-package com.app.ggshop.v1.service;
+package com.app.ggshop.v1.service.Login;
 
 import com.app.ggshop.v1.common.enumeration.Provider;
 import com.app.ggshop.v1.common.exception.LoginFailException;

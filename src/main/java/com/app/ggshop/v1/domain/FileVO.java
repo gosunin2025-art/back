@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString(callSuper = true)
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of="id", callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
 public class FileVO extends Period {
