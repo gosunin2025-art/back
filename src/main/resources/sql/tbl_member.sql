@@ -17,5 +17,5 @@ CREATE TABLE tbl_member
 DROP TABLE tbl_member;
 set foreign_key_checks = 1;
 select * from tbl_member;
-SELECT * FROM member WHERE memberEmail = '입력한이메일';
+
 

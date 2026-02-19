@@ -111,3 +111,8 @@
     font-size: 11px;
         text-align: right;
 }
+.login-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}

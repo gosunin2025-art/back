@@ -2,8 +2,8 @@
 create table tbl_board
 ( #거래 게시글
       id              bigint unsigned auto_increment primary key,
-  title           varchar(255)    not null,
-  content         text            not null,
+  board_title           varchar(255)    not null,
+  board_content         text            not null,
   board_filter    enum ('all', '구매', '판매')   default 'all',
   board_status    enum ('active', 'inactive') default 'active',
   created_date    datetime                   default current_timestamp(),

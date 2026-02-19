@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,11 +23,12 @@ public class MemberMapperTests {
     private MemberMapper memberMapper;
 
     @Test
+    @Transactional
     public void testInsert() {
         MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setMemberEmail("test@gmail.com");
+        memberDTO.setMemberEmail("test1@gmail.com");
         memberDTO.setMemberPassword("1234");
-        memberDTO.setMemberName("test112");
+        memberDTO.setMemberName("test");
         memberDTO.setProvider(Provider.THREETIER);
 
         memberMapper.insert(memberDTO);
