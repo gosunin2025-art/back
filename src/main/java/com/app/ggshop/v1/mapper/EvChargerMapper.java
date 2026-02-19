@@ -27,4 +27,26 @@ public interface EvChargerMapper {
 //    );
 
     int selectTotalCount();
+
+    List<EvChargerDTO> selectBySearch(
+            @Param("searchType") String searchType,
+            @Param("keyword") String keyword,
+            @Param("criteria") Criteria criteria
+    );
+
+    int selectTotalBySearch(
+            @Param("searchType") String searchType,
+            @Param("keyword") String keyword
+    );
+
+    EvChargerDTO selectById(Long id);
+
+    void updateEvCharger(EvChargerDTO evChargerDTO);
+
+    // 삭제
+    void deleteById(Long id);
+
+
+
+
 }

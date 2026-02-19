@@ -89,9 +89,7 @@ function initSearch() {
     if (!searchForm || !searchSelect || !searchInput) return;
 
     searchForm.addEventListener('submit', (e) => {
-        // 임시) 검색 기능 콘솔 확인용, form 기본 submit 방지
-        // 서버 구현시 submit 제거 여부 확인 필요
-        e.preventDefault();
+        // ✅ 서버 구현 완료! e.preventDefault() 제거!
 
         // 선택된 검색 조건
         const searchType = searchSelect.value;
@@ -99,10 +97,25 @@ function initSearch() {
         // 입력된 검색어 (앞뒤 공백 제거)
         const keyword = searchInput.value.trim();
 
-        //  임시) 검색 기능 확인용 콘솔
-        console.log('검색 조건', searchType);
-        console.log('검색어', keyword);
+        // 검색어가 비어있으면 submit 방지
+        if (!keyword) {
+            e.preventDefault();
+            alert('검색어를 입력해주세요.');
+            return;
+        }
 
-        // ※ submit은 form action/method에 따라 서버로 전달됨
+        // 확인용 콘솔
+        console.log('검색 조건:', searchType);
+        console.log('검색어:', keyword);
+
+        // ※ form의 action/method에 따라 서버로 자동 전달됨
     });
+}
+
+function goToList() {
+    location.href = '/ev/evcharger/list/1';
+}
+
+function goToRegister() {
+    location.href = '/ev/evcharger';
 }

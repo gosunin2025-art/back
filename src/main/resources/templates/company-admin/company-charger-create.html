@@ -15,55 +15,56 @@
     <link rel="stylesheet" href="/css/company-admin/company-utill.css">
     <link rel="stylesheet" href="/css/company-admin/company-charger-create.css" />
 
+    <link type="text/css" th:href="@{/css/company-admin/top.css}" rel="stylesheet" />
+    <link type="text/css" th:href="@{/css/company-admin/menu-flex.css}" rel="stylesheet" />
+
+    <style>
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+
 
 </head>
 
 <body>
-
-
-
+    <div th:replace="/company-admin/top::top" style="margin-bottom: 20px;"></div>
     <main role="main">
         <div class="container flex-1 quiry-contents-box" id="page-container">
             <div class="row">
                 <div class="lg:col-9">
-
                     <header class="mb-5 header-style page-title">
                         <h1>새 충전소 등록</h1>
                     </header>
-
                     <div class="form height-fixed">
-
                         <form class="request-form"
                               id="new-request"
                               th:action="@{/ev/evcharger}"
                               method="post">
-
                             <!-- CSRF -->
                             <!--                        <input type="hidden"-->
                             <!--                               th:name="${_csrf.parameterName}"-->
                             <!--                               th:value="${_csrf.token}"/>-->
-
                             <div class="form-field string required">
                                 <label>설치일자</label>
                                 <input type="date" name="installDate">
                             </div>
-
                             <div class="form-field string required">
                                 <label>충전소 번호</label>
                                 <input type="text" name="stationNumber">
                             </div>
-
                             <div class="form-field string required">
                                 <label>설치주소</label>
                                 <!--                            <input type="text" name="installAddress">-->
-
                                 <input
                                         id="addressInput"
                                         name="installAddress"
                                         placeholder="새로운 주소를 입력하세요."
                                         maxlength="40"
                                         type="text"
-
                                         style ="height: 48px;"
                                         aria-invalid="false"
                                         value=""
@@ -71,50 +72,33 @@
                                         readonly
                                 >
 
-
                             </div>
-
                             <div class="form-field text">
                                 <label>특이사항</label>
                                 <textarea name="chargerNote"></textarea>
                             </div>
-
                             <footer>
                                 <input class="btn-cancel"
                                        type="button"
                                        value="취소"
                                        th:onclick="|location.href='@{/ev/evcharger}'|">
-
                                 <input class="btn-submit"
                                        type="submit"
                                        value="완료">
                             </footer>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
-
-
-
-
-
-
 </body>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <script>
-
     // const checkbox = document.getElementById("chk");
     const addressInput = document.getElementById("addressInput");
-
     const defaultAddress = "서울특별시 용산구 새창로 181";
-
-
 
     /* 우편번호 주소 찾기 */
 
@@ -123,15 +107,13 @@
         new daum.Postcode({
             oncomplete: function (data) {
                 const roadAddr = data.roadAddress;
-
                 // 주소 input에 값 넣기
                 const addressInput = document.getElementById("addressInput");
                 addressInput.value = roadAddr;
             }
         }).open();
     }
-
-
 </script>
+<!-- JS -->
 
 </html>

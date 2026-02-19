@@ -28,10 +28,14 @@
     <link rel="stylesheet" th:href="@{/css/common/fontawesome.css}" />
     <link rel="stylesheet" th:href="@{/css/common/util.css}" />
     <link rel="stylesheet" th:href="@{/css/company-admin/company-sidetap.css}" />
+
+    <link type="text/css" th:href="@{/css/company-admin/top.css}" rel="stylesheet" />
+    <link type="text/css" th:href="@{/css/company-admin/menu-flex.css}" rel="stylesheet" />
 </head>
 <body>
 
 
+    <div th:replace="/company-admin/top::top" style="margin-bottom: 20px;"></div>
 
 
     <nav id="app-navbar-layout-nav"

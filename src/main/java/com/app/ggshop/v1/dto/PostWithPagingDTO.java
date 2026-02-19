@@ -14,5 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 public class PostWithPagingDTO {
     private List<EvChargerDTO> evChargerList;
+
+    // 추가 필드
+    private List<CompanyEmployeeDTO> employeeList;
+
     private Criteria criteria;
 }

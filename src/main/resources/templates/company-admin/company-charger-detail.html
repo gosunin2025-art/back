@@ -37,8 +37,16 @@
 
         <!-- 개별 css 스타일 -->
         <link rel="stylesheet" href="/css/company-admin/company-charger-detail.css" />
+
+        <link type="text/css" th:href="@{/css/company-admin/top.css}" rel="stylesheet" />
+        <link type="text/css" th:href="@{/css/company-admin/menu-flex.css}" rel="stylesheet" />
+
     </head>
     <body>
+
+    <div th:replace="/company-admin/top::top" style="margin-bottom: 20px;"></div>
+
+
         <!-- 컨테이너 -->
         <div class="inner-content">
             <!-- 목록 헤더 영역 -->

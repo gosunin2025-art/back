@@ -4,30 +4,31 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>기업 - 검색 버튼(필터)</title>
-       
         <!-- favicon -->
         <link rel="shortcut icon" href="https://wabiz-static-dev.s3.ap-northeast-2.amazonaws.com/static/favicon/favicon.png" type="image/x-icon" />
-
         <!-- 폰트 -->
         <link rel="stylesheet" href="/css/common/font.css" />
-
         <!-- 스타일 초기화 css -->
         <link rel="stylesheet" href="/css/common/reset.css" />
-
         <!-- 공통 css -->
         <link rel="stylesheet" href="/css/common/common.css">
-
         <!-- fontawesome 꾸며진 폰트 -->
         <link rel="stylesheet" href="/css/common/fontawesome.css">
-
         <!-- 유틸 css -->
         <link rel="stylesheet" href="/css/common/util.css" />
-
         <!-- 개별 css 스타일 -->
         <link rel="stylesheet" href="/css/company-admin/company-search-button.css" />
+
+        <link type="text/css" th:href="@{/css/company-admin/top.css}" rel="stylesheet" />
+        <link type="text/css" th:href="@{/css/company-admin/menu-flex.css}" rel="stylesheet" />
+
     </head>
     <body>
-        <!-- 검색 필터 영역 -->
+
+    <div th:replace="/company-admin/top::top" style="margin-bottom: 20px;"></div>
+
+
+    <!-- 검색 필터 영역 -->
         <form id="filter-form">
             <div class="wrap-filter">
                 <div class="inner-filter">

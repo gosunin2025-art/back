@@ -11,8 +11,13 @@
     <link rel="stylesheet" href="/css/common/fontawesome.css">
     <link rel="stylesheet" href="/css/common/util.css" />
     <link rel="stylesheet" href="/css/company-admin/company-charger.css" />
+
+    <link type="text/css" th:href="@{/css/company-admin/top.css}" rel="stylesheet" />
+    <link type="text/css" th:href="@{/css/company-admin/menu-flex.css}" rel="stylesheet" />
 </head>
 <body>
+
+<div th:replace="/company-admin/top::top" style="margin-bottom: 20px;"></div>
 <main class="board">
     <div class="ui-header">
         <h2 class="title">충전소 관리</h2>
@@ -20,24 +25,22 @@
 
     <div class="segmented-tabs">
         <ul>
-            <li class="active"><a th:href="@{/ev/evcharger}">충전소 목록</a></li>
-            <li><a th:href="@{/ev/evcharger}">새 충전소 등록</a></li>
-            <li><a th:href="@{/ev/evcharger}">충전소 수정</a></li>
+            <li class="active"><a href="#" onclick="goToList(); return false;">충전소 목록</a></li>
+            <li><a href="#" onclick="goToRegister(); return false;">새 충전소 등록</a></li>
         </ul>
     </div>
 
     <div class="board-main">
         <ul>
             <li th:each="charger : ${chargerList}">
-                <a href="#!" class="article no-thumb">
+                <!-- ✅ update → detail로 변경 -->
+                <a th:href="@{/ev/evcharger/detail/{id}(id=${charger.id})}" class="article no-thumb">
                     <div class="info-box">
                         <div class="info-inner">
-                            <!-- 제목 -->
-                            <h3 class="title" th:text="|[${charger.evChargerAddress}] ${charger.evChargerUid} / ${charger.evChargerContent}|">
+                            <h3 class="title" th:text="|[${charger.installAddress}] ${charger.stationNumber} / ${charger.chargerNote}|">
                                 [주소] UID / 내용
                             </h3>
-                            <!-- 설치일 -->
-                            <span class="created-at" th:text="${charger.setupDate}">2026-01-01</span>
+                            <span class="created-at" th:text="${charger.installDate}">2026-01-01</span>
                         </div>
                     </div>
                 </a>
@@ -48,46 +51,75 @@
     <div class="board-footer">
         <div class="pagination">
             <div class="page">
-                <div class="desktop-only">
-                    <button class="prev-page icon-chevron-left" data-page="0">
-                        <span class="text-hidden">이전 목록</span>
-                    </button>
-                    <a href="#!" data-page="1" class="current">1</a>
-                    <a href="#!" data-page="2">2</a>
-                    <a href="#!" data-page="3">3</a>
-                    <a href="#!" data-page="4">4</a>
-                    <a href="#!" data-page="5">5</a>
-                    <a href="#!" data-page="6">6</a>
-                    <button class="next-page icon-chevron-right" data-page="7">
-                        <span class="text-hidden">다음 목록</span>
-                    </button>
+                <div class="desktop-only" style="display: flex; gap: 5px; align-items: center; justify-content: center;">
+
+                    <!-- 이전 버튼 -->
+                    <a th:if="${pagination.page > 1}"
+                       th:href="${keyword != null} ?
+                           @{/ev/evcharger/search(searchType=${searchType}, keyword=${keyword}, page=${pagination.page - 1})} :
+                           @{/ev/evcharger/list/{page}(page=${pagination.page - 1})}"
+                       style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 1px solid #ddd; background: white; color: #333; text-decoration: none; border-radius: 4px; font-size: 18px;">
+                        ‹
+                    </a>
+                    <span th:unless="${pagination.page > 1}"
+                          style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 1px solid #e5e5e5; background: #f9f9f9; color: #ccc; border-radius: 4px; font-size: 18px;">
+                        ‹
+                    </span>
+
+                    <!-- 페이지 번호들 -->
+                    <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                        <a th:href="${keyword != null} ?
+                               @{/ev/evcharger/search(searchType=${searchType}, keyword=${keyword}, page=${i})} :
+                               @{/ev/evcharger/list/{page}(page=${i})}"
+                           th:style="${i == pagination.page} ?
+                               'display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 32px; padding: 0 8px; background: #333; color: white; text-decoration: none; border-radius: 4px; font-weight: 500;' :
+                               'display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 32px; padding: 0 8px; border: 1px solid #ddd; background: white; color: #333; text-decoration: none; border-radius: 4px;'"
+                           th:text="${i}">1</a>
+                    </th:block>
+
+                    <!-- 다음 버튼 -->
+                    <a th:if="${pagination.page < pagination.realEnd}"
+                       th:href="${keyword != null} ?
+                           @{/ev/evcharger/search(searchType=${searchType}, keyword=${keyword}, page=${pagination.page + 1})} :
+                           @{/ev/evcharger/list/{page}(page=${pagination.page + 1})}"
+                       style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 1px solid #ddd; background: white; color: #333; text-decoration: none; border-radius: 4px; font-size: 18px;">
+                        ›
+                    </a>
+                    <span th:unless="${pagination.page < pagination.realEnd}"
+                          style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 1px solid #e5e5e5; background: #f9f9f9; color: #ccc; border-radius: 4px; font-size: 18px;">
+                        ›
+                    </span>
+
                 </div>
             </div>
         </div>
 
         <div class="search">
-            <form id="news-board-search">
+            <form id="news-board-search" th:action="@{/ev/evcharger/search}" method="get">
                 <div class="filter-container">
-                    <select id="search-select-in-board" class="filter">
-                        <option value="tc">전체</option>
-                        <option value="t">제목</option>
-                        <option value="c">내용</option>
+                    <select id="search-select-in-board" class="filter" name="searchType">
+                        <option value="all" th:selected="${searchType == 'all' or searchType == null}">전체</option>
+                        <option value="stationNumber" th:selected="${searchType == 'stationNumber'}">충전소번호</option>
+                        <option value="address" th:selected="${searchType == 'address'}">주소</option>
                     </select>
                 </div>
                 <div class="field">
                     <label class="text-hidden">검색창</label>
-                    <input type="text" id="search-text-in-board" class="search-form" name="searchTextInBoard" value="">
+                    <input type="text"
+                           id="search-text-in-board"
+                           class="search-form"
+                           name="keyword"
+                           th:value="${keyword}"
+                           placeholder="검색어를 입력하세요"
+                           required>
                     <button class="btn-search dense" type="submit">검색</button>
-                    <input id="searchText1" name="searchText1" type="hidden" value="">
-                    <input id="searchSelect1" name="searchSelect1" type="hidden" value="">
-                    <input id="searchSelect2" name="searchSelect2" type="hidden" value="">
-                    <input id="searchSelect4" name="searchSelect4" type="hidden" value="">
-                    <input id="searchSelect5" name="searchSelect5" type="hidden" value="">
                 </div>
             </form>
         </div>
     </div>
 </main>
-<script src="/js/company-admin/company-charger.js"></script>
+
 </body>
+
+<script src="/js/company-admin/company-charger.js"></script>
 </html>

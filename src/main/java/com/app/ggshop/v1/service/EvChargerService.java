@@ -102,6 +102,42 @@ public class EvChargerService {
         return postWithPagingDTO;
     }
 
+    public PostWithPagingDTO searchEvChargers(String searchType, String keyword, int page) {
+        PostWithPagingDTO postWithPagingDTO = new PostWithPagingDTO();
 
+        // 검색 조건에 맞는 전체 개수 조회
+        int total = evChargerDAO.findTotalBySearch(searchType, keyword);
 
+        Criteria criteria = new Criteria(page, total);
+
+        // 검색 결과 조회 (페이징 포함)
+        List<EvChargerDTO> list = evChargerDAO.findBySearch(searchType, keyword, criteria);
+
+        criteria.setHasMore(list.size() > criteria.getRowCount());
+        postWithPagingDTO.setCriteria(criteria);
+
+        if(criteria.isHasMore()){
+            list.remove(list.size() - 1);
+        }
+
+        postWithPagingDTO.setEvChargerList(list);
+
+        return postWithPagingDTO;
+    }
+
+    // ID로 충전소 조회
+    public EvChargerDTO getEvChargerById(Long id) {
+        return evChargerDAO.findById(id);
+    }
+
+    // 충전소 수정
+    public void updateEvCharger(EvChargerDTO evChargerDTO) {
+        evChargerDAO.update(evChargerDTO);
+    }
+
+    // 충전기 삭제
+
+    public void remove(Long id) {
+        evChargerDAO.delete(id);
+    }
 }

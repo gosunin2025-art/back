@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기업 - 임직원 수정</title>
-
+    <title>기업 - 충전소 수정</title>
+    <link rel="shortcut icon" href="https://wabiz-static-dev.s3.ap-northeast-2.amazonaws.com/static/favicon/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/common/font.css" />
     <link rel="stylesheet" href="/css/common/reset.css" />
     <link rel="stylesheet" href="/css/common/common.css">
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<div th:replace="~{/company-admin/top::top}" style="margin-bottom: 20px;"></div>
+<div th:replace="/company-admin/top::top" style="margin-bottom: 20px;"></div>
 
 <main role="main">
     <div class="container flex-1 quiry-contents-box" id="page-container">
@@ -26,83 +26,56 @@
 
                 <!-- 헤더 -->
                 <header class="mb-5 header-style page-title">
-                    <h1>임직원 정보 수정</h1>
+                    <h1>충전소 정보 수정</h1>
                 </header>
 
                 <!-- 수정 폼 -->
                 <div class="form height-fixed">
                     <form class="request-form"
                           id="update-request"
-                          th:action="@{/ev/company/emp/update/{id}(id=${employee.id})}"
+                          th:action="@{/ev/evcharger/update/{id}(id=${charger.id})}"
                           method="post">
 
-                        <!-- 가입일자 (읽기 전용) -->
+                        <!-- 설치일자 (읽기 전용) -->
                         <div class="form-field string required">
-                            <label>가입일자</label>
+                            <label>설치일자</label>
                             <input type="text"
-                                   name="joinDate"
-                                   th:value="${employee.joinDate}"
+                                   name="installDate"
+                                   th:value="${charger.installDate}"
                                    readonly
                                    style="background-color: #f5f5f5; cursor: not-allowed;">
                             <p class="field-hint">※ 수정할 수 없는 정보입니다.</p>
                         </div>
 
-                        <!-- 사원번호 (읽기 전용) -->
+                        <!-- 충전소 번호 (읽기 전용) -->
                         <div class="form-field string required">
-                            <label>사원번호</label>
+                            <label>충전소 번호</label>
                             <input type="text"
-                                   name="employeeNumber"
-                                   th:value="${employee.employeeNumber}"
+                                   name="stationNumber"
+                                   th:value="${charger.stationNumber}"
                                    readonly
                                    style="background-color: #f5f5f5; cursor: not-allowed;">
                             <p class="field-hint">※ 수정할 수 없는 정보입니다.</p>
                         </div>
 
-                        <!-- 이름 (수정 가능) -->
+                        <!-- 설치주소 (수정 가능 + 다음 주소 API) -->
                         <div class="form-field string required">
-                            <label>이름</label>
-                            <input type="text"
-                                   name="employeeName"
-                                   th:value="${employee.employeeName}"
-                                   placeholder="이름을 입력하세요"
-                                   required>
-                        </div>
-
-                        <!-- 부서 (수정 가능) -->
-                        <div class="form-field string required">
-                            <label>소속 부서</label>
-                            <input type="text"
-                                   name="department"
-                                   th:value="${employee.department}"
-                                   placeholder="예) 고객지원팀"
-                                   required>
-                        </div>
-
-                        <!-- 직급 (수정 가능) -->
-                        <div class="form-field string required">
-                            <label>직급</label>
-                            <input type="text"
-                                   name="position"
-                                   th:value="${employee.position}"
-                                   placeholder="예) 사원"
-                                   required>
-                        </div>
-
-                        <!-- 이메일 (수정 가능) -->
-                        <div class="form-field string required">
-                            <label>이메일</label>
-                            <input type="email"
-                                   name="email"
-                                   th:value="${employee.email}"
-                                   placeholder="이메일을 입력하세요"
-                                   required>
+                            <label>설치주소</label>
+                            <input id="addressInput"
+                                   name="installAddress"
+                                   type="text"
+                                   th:value="${charger.installAddress}"
+                                   placeholder="클릭하여 주소를 검색하세요"
+                                   onclick="sample4_execDaumPostcode();"
+                                   readonly
+                                   style="cursor: pointer;">
                         </div>
 
                         <!-- 특이사항 (수정 가능) -->
                         <div class="form-field text">
                             <label>특이사항</label>
-                            <textarea name="employeeNote"
-                                      th:text="${employee.employeeNote}"
+                            <textarea name="chargerNote"
+                                      th:text="${charger.chargerNote}"
                                       placeholder="특이사항을 입력하세요"></textarea>
                         </div>
 
@@ -111,7 +84,7 @@
                             <input class="btn-cancel"
                                    type="button"
                                    value="취소"
-                                   th:onclick="|location.href='@{/ev/company/emp/detail/{id}(id=${employee.id})}'|">
+                                   th:onclick="|location.href='@{/ev/evcharger/detail/{id}(id=${charger.id})}'|">
                             <input class="btn-submit"
                                    type="submit"
                                    value="수정 완료">
@@ -123,5 +96,17 @@
     </div>
 </main>
 
+<!-- 다음 주소 API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                const roadAddr = data.roadAddress;
+                document.getElementById("addressInput").value = roadAddr;
+            }
+        }).open();
+    }
+</script>
 </body>
 </html>
